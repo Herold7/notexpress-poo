@@ -6,7 +6,7 @@ use utilities\Database;
 
 abstract class AbstractController
 {
-    protected $pdo
+    protected $pdo;
 
 public function __construct()
 {
