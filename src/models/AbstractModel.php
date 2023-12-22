@@ -34,12 +34,47 @@ abstract class AbstractModel
     }
 
     /**
+     * Method readAll()
+     * To read all element in the database
+     * @param void
+     * @return array
+     */
+    public function findAll(): array
+    {
+        $query = $this->pdo->prepare(
+            "SELECT * FROM {$this->table}"
+        );
+        $query->execute();
+        $result = $query->fetchAll();
+        return $result;
+        
+    }
+
+/**
+     * Method read()
+     * To read all element in the database
+     * @param string
+     * @return array
+     */
+    public function find(string $slug): array
+    {
+        $query = $this->pdo->prepare(
+            "SELECT * FROM {$this->table} WHERE slug = '{$slug}'"
+        );
+        $query->execute();
+        $result = $query->fetch();
+        return $result;
+        
+    }
+
+
+    /**
      * Method update()
      * To update an element already in the database
-     * @param int $id
+     * @param string $slug
      * @return void
      */
-    public function update($slug): void
+    public function update(string $slug): void
     {
         $query = $this->pdo->prepare(
             "UPDATE {$this->table} SET {$this->fields} WHERE slug = '{$slug}'"
@@ -50,7 +85,7 @@ abstract class AbstractModel
     /**
      * Methods delete()
      * To delete a new element in the database
-     * @param int $id
+     * @param string $slug
      * @param ?string $relation
      * @return void
      */
