@@ -3,10 +3,8 @@ $pageTitle = 'Edit note';
 
 use models\Note;
 
-$noteId = $_GET['slug'];
-
 $note = new Note();
-$note->find($noteId);
+$note->find($_GET['slug']);
 
 ?>
 
